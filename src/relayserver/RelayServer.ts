@@ -430,7 +430,7 @@ export class RelayServer extends EventEmitter {
     this.rawTxOptions = this.contractInteractor.getRawTxOptions()
 
     // todo: fix typo AND fix metacoin
-    // console.log('intialized', this.chainId, this.networkId, this.rawTxOptions)
+    debug('initialized', this.chainId, this.networkId, this.rawTxOptions)
     this.initialized = true
   }
 
@@ -441,7 +441,7 @@ export class RelayServer extends EventEmitter {
       const refill = toBN(this.workerTargetBalance).sub(workerBalance)
       const balance = await this.getManagerBalance()
       const managerHubBalance = await this.relayHubContract?.balanceOf(this.managerAddress) ?? toBN(0)
-      console.log(
+      debug(
         `== replenishWorker(${workerIndex}): mgr balance=${balance.div(
           toBN(1e18)).toString()}  manager hub balance=${managerHubBalance.div(toBN(1e18)).toString()} 
           worker balance=${workerBalance.div(
@@ -815,7 +815,6 @@ export class RelayServer extends EventEmitter {
       releaseMutex()
     }
     const receipt = await this.contractInteractor.sendSignedTransaction(signedTx)
-    console.log('\ntxhash is', receipt.transactionHash)
     if (receipt.transactionHash.toLowerCase() !== storedTx.txId.toLowerCase()) {
       throw new Error(`txhash mismatch: from receipt: ${receipt.transactionHash} from txstore:${storedTx.txId}`)
     }
@@ -853,7 +852,6 @@ export class RelayServer extends EventEmitter {
     debug('resending tx with nonce', txToSign.nonce, 'from', tx.from)
     debug('account nonce', await this.contractInteractor.getTransactionCount(tx.from))
     const receipt = await this.contractInteractor.sendSignedTransaction(signedTx)
-    console.log('\ntxhash is', receipt.transactionHash)
     if (receipt.transactionHash.toLowerCase() !== storedTx.txId.toLowerCase()) {
       throw new Error(`txhash mismatch: from receipt: ${receipt.transactionHash} from txstore:${storedTx.txId}`)
     }
