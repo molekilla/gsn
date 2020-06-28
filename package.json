@@ -44,7 +44,6 @@
     "lint:js:fix": "eslint --ext .js,.ts --cache  -f unix --ignore-path .gitignore src test scripts --fix",
     "generate": "rm -rf ./build/contracts && npx truffle compile && typechain --target trufflehotfix './build/contracts/**/*.json' && yarn run extract_abi",
     "tsc": "tsc --noEmit",
-    "postinstall": "patch-package",
     "postpack": "./scripts/postpack",
     "prepare": "./scripts/prepublish"
   },
