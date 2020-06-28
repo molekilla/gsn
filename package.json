@@ -43,9 +43,7 @@
     "lint:sol": "solhint -f unix \"contracts/**/*.sol\" --max-warnings 0",
     "lint:js:fix": "eslint --ext .js,.ts --cache  -f unix --ignore-path .gitignore src test scripts --fix",
     "generate": "rm -rf ./build/contracts && npx truffle compile && typechain --target trufflehotfix './build/contracts/**/*.json' && yarn run extract_abi",
-    "tsc": "tsc --noEmit",
-    "postpack": "./scripts/postpack"
-  },
+    "tsc": "tsc --noEmit"  },
   "dependencies": {
     "@openeth/truffle-typings": "0.0.6",
     "@openzeppelin/contracts": "3.0.2",
